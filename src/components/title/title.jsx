@@ -1,4 +1,4 @@
-import "./Title.scss";
+import "./title.scss";
 
 export default function Title(props) {
   return (
