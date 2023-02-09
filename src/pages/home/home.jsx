@@ -6,7 +6,6 @@ import * as services from "../../services/services";
 import CrudItem from "../../components/crud/crud-item";
 import { useRef } from "react";
 
-
 const Home = () => {
 
     const [success, setSuccess] = useState(false);
