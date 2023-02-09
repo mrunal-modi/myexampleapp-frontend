@@ -1,7 +1,7 @@
 import "./form.scss";
 import React, { useState } from 'react';
 
-const Form = ({ className, formInputs, buttonLabel="Submit", onSubmit}) => {
+const Form = ({ className, formInputs, buttonLabel = "Submit", onSubmit, error, success }) => {
     const [data, setData] = useState({});
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -18,7 +18,7 @@ const Form = ({ className, formInputs, buttonLabel="Submit", onSubmit}) => {
     }
 
     return (
-        <form className={`${className} contact-us-form`} onSubmit={handleSubmit}>
+        <form className={`${className} form`} onSubmit={handleSubmit}>
             {formInputs.map((el, i) =>
                 <label key={i} style={{ width: el.width || "100%", marginBottom: 20, padding: "0 15px" }}>
                     <span>
@@ -47,6 +47,15 @@ const Form = ({ className, formInputs, buttonLabel="Submit", onSubmit}) => {
                     {buttonLabel}
                 </button>
             </div>
+            
+
+            {success && <div className="alert alert-success col-12">
+                Successfully submitted!
+            </div>}
+            {error && <div className="alert alert-danger col-12">
+                {error}
+            </div>}
+
         </form>
 
     )
