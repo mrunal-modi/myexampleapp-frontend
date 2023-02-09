@@ -3,7 +3,9 @@ import React, { useState } from "react";
 import Form from "../../components/form/form";
 import Title from "../../components/title/title";
 import { _create } from "../../services/services";
-import CrudItem from "../../components/crud/crud-item";
+// import CrudItem from "../../components/crud/crud-item";
+import ReadAll from "../../components/crud/read";
+
 
 const Home = () => {
 
@@ -14,7 +16,7 @@ const Home = () => {
     //     _create(data.email);
     // }
 
-    const handleSubmit = async (data) => {
+    const handlePOST = async (data) => {
         try {
             const res = await _create(data.email);;
             if (res.status === 200) {
@@ -29,16 +31,13 @@ const Home = () => {
     return (
         <div className="home-page">
             <div className="column">
-
                 <Title title="Create" />
-
                 {success && <div className="alert alert-success col-12">
                     Successfully submitted!
                 </div>}
                 {error && <div className="alert alert-danger col-12">
                     {error}
                 </div>}
-
                 <Form className="post-form"
                     formInputs={
                         [
@@ -51,13 +50,12 @@ const Home = () => {
                             }
                         ]
                     }
-                    onSubmit={handleSubmit}
+                    onSubmit={handlePOST}
                 />
             </div>
             <div className="column">
                 <Title title="Read | Update | Delete" />
-
-                <CrudItem/>
+                <ReadAll/>
             </div>
 
         </div>

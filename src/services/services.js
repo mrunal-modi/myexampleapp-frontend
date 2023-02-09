@@ -18,5 +18,5 @@ export const _update = (email, newEmail) => {
 }
 
 export const _delete = (email) => {
-    return axios.delete("/delete/" + email)
+    return axios.delete("/user/" + email)
 }

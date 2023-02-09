@@ -5,8 +5,8 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
-
 import "./crud-item.scss";
+// import * as services from "../../services/services";
 
 const CrudItem = ({ title, isDone, onDelete, onChange }) => {
 
