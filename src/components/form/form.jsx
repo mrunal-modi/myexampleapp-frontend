@@ -1,8 +1,16 @@
 import "./form.scss";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-const Form = ({ className, formInputs, buttonLabel = "Submit", onSubmit, error, success }) => {
+const Form = ({ className, formInputs, buttonLabel = "Submit", onSubmit, error, success, resetInput }) => {
     const [data, setData] = useState({});
+
+    useEffect(() => {
+        if(resetInput){
+            setData({})
+        }
+    }, [resetInput]);
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
         onSubmit(data);

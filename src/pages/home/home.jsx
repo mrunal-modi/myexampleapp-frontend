@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Form from "../../components/form/form";
 import Title from "../../components/title/title";
 import * as services from "../../services/services";
-import CrudItem from "../../components/crud/crud-item";
+import EditItemUI from "../../components/edit-item/edit-item";
 import { useRef } from "react";
 
 const Home = () => {
@@ -16,12 +16,11 @@ const Home = () => {
     const successTimeout = useRef();
     const errorTimeout = useRef();
     const [data, setData] = useState(null);
+    const [resetInput, setResetInput] = useState(false);
+
     useEffect(() => {
         readData();
     }, []); // Empty Array ensures the useEffect will only run Once!
-
-
-
 
     useEffect(() => {
         if (errorTimeout.current) {
@@ -45,11 +44,13 @@ const Home = () => {
     const handlePOST = async (d) => {
         try {
             setSuccess(false);
+            setResetInput(false);
             setError(false);
             setSubmitting(true);
             const res = await services._create(d.email);;
             if (res.status === 200) {
                 setSuccess(true);
+                setResetInput(true);
                 console.log(res.data);
                 setData([...data, res.data]);
             }
@@ -86,7 +87,7 @@ const Home = () => {
             const d = [...data];
             const i = d.findIndex((el) => el.email === email);
             if (i !== -1) {
-              d[i] = res.data;
+                d[i] = res.data;
             }
             setData(d);
 
@@ -95,8 +96,7 @@ const Home = () => {
             setError(err?.response?.data?.error);
             console.log(err.response);
         }
-      };
-    
+    };
 
     // Delete
     const deleteData = async (email) => {
@@ -124,16 +124,16 @@ const Home = () => {
         <div className="home-page">
             <div className="column">
                 <Title title="Create" />
-
                 <Form className="post-form"
+                    resetInput={resetInput}
                     formInputs={
                         [
                             {
-                                label: "Email",
+                                label: "",
                                 type: "text",
                                 validation: "email",
                                 name: "email",
-                                placeholder: "jhon@example.com"
+                                placeholder: "Enter Text"
                             }
                         ]
                     }
@@ -147,7 +147,7 @@ const Home = () => {
                 <Title title="Read | Update | Delete" />
 
                 {data?.map((el, i) => (
-                    <CrudItem
+                    <EditItemUI
                         onChange={(value) => {
                             handleChange(el.email, value);
                         }}

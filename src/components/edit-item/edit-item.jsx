@@ -5,10 +5,10 @@ import {
   DropdownMenu,
   DropdownItem,
 } from "reactstrap";
-import "./crud-item.scss";
+import "./edit-item.scss";
 // import * as services from "../../services/services";
 
-const CrudItem = ({ item, onDelete, onChange }) => {
+const EditItemUI = ({ item, onDelete, onChange }) => {
 
   const [isEdit, setIsEdit] = useState(false);
   const [value, setValue] = useState(item);
@@ -51,4 +51,4 @@ const CrudItem = ({ item, onDelete, onChange }) => {
   );
 };
 
-export default CrudItem;
+export default EditItemUI;

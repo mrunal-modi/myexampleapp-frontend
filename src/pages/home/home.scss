@@ -15,5 +15,14 @@
         padding: 20px;
         border-radius: 4px;
     }
+    @media (max-width: 767px) {
+        flex-wrap: wrap;
+        .column{
+            width: 100%;
+            &:first-child{
+                margin-bottom: 20px;
+            }
+        }
+    }
 }
 
